@@ -1,5 +1,6 @@
 package org.jerry.light4j.member.etm.member.user.domain;
-import java.sql.Timestamp;
+
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -62,7 +63,7 @@ public class MemberUser{
     *用户最后登陆时间
     */
     @Column(name = "MEMBER_USER_LAST_DATE",columnDefinition = "datetime")
-    private Timestamp memberUserLastDate;
+    private Date memberUserLastDate;
     /**
     *用户角色编号
     */
@@ -122,10 +123,10 @@ public class MemberUser{
 	public void setMemberUserTokenid(String memberUserTokenid) {
 		this.memberUserTokenid = memberUserTokenid;
 	}
-	public Timestamp getMemberUserLastDate() {
+	public Date getMemberUserLastDate() {
 		return memberUserLastDate;
 	}
-	public void setMemberUserLastDate(Timestamp memberUserLastDate) {
+	public void setMemberUserLastDate(Date memberUserLastDate) {
 		this.memberUserLastDate = memberUserLastDate;
 	}
 	public String getMemberUserRoleCode() {

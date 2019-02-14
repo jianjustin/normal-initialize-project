@@ -58,6 +58,21 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>${springfox.version}</version>
 		</dependency>
+		<!-- bean操作集合 -->
+		<dependency>
+		  <groupId>commons-beanutils</groupId>
+		  <artifactId>commons-beanutils</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>commons-lang</groupId>
+		  <artifactId>commons-lang</artifactId>
+		</dependency>
+		<!-- json工具依赖包 -->
+		<dependency>
+	      <groupId>com.google.code.gson</groupId>
+	      <artifactId>gson</artifactId>
+	      <scope>compile</scope>
+	    </dependency>
 	</dependencies>
 
 	<build>

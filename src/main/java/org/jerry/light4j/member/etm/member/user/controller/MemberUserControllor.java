@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @Api(tags="member.user",value="用户模块")
-@RequestMapping(value = "/member/user/",produces = { "application/json; charset=UTF-8" })
+@RequestMapping(value = "/member/user/",produces = { "application/json; charset=UTF-8" },consumes = {"text/plain", "application/json"})
 public class MemberUserControllor{
     @Autowired
 	private MemberUserService memberUserService;
