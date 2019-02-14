@@ -1,13 +1,14 @@
 package org.jerry.light4j.member.etm.member.user.service.impl;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
-
 import org.jerry.light4j.member.common.base.repository.impl.BaseQueryRepositoryImpl;
 import org.jerry.light4j.member.etm.member.user.domain.MemberUser;
 import org.jerry.light4j.member.etm.member.user.repository.MemberUserRepository;
 import org.jerry.light4j.member.etm.member.user.service.MemberUserService;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,7 +52,7 @@ public class MemberUserServiceImpl implements MemberUserService{
 	public MemberUserRepository getMemberUserRepository() {
 		return memberUserRepository;
 	}
-	public void setMemberUserRepository(MemberUserRepository MemberUserRepository) {
+	public void setMemberUserRepository(MemberUserRepository memberUserRepository) {
 		this.memberUserRepository = memberUserRepository;
 	}
 	public BaseQueryRepositoryImpl<MemberUser, Serializable> getBaseQueryRepositoryImpl() {

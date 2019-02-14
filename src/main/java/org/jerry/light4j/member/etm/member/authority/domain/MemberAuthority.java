@@ -1,4 +1,5 @@
 package org.jerry.light4j.member.etm.member.authority.domain;
+import java.math.BigInteger;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,6 +20,7 @@ public class MemberAuthority{
     /**
     *主键ID
     */
+	@Id
     @Column(name = "PK_ID",columnDefinition = "BIGINT")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pkId;
@@ -26,31 +28,26 @@ public class MemberAuthority{
     *权限对照编号
     */
     @Column(name = "MEMBER_AUTHORITY_CODE",columnDefinition = "VARCHAR2")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String memberAuthorityCode;
     /**
     *角色编号
     */
     @Column(name = "MEMBER_AUTHORITY_ROLE_CODE",columnDefinition = "VARCHAR2")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String memberAuthorityRoleCode;
     /**
     *资源编号
     */
     @Column(name = "MEMBER_AUTHORITY_RESOURCE_CODE",columnDefinition = "VARCHAR2")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String memberAuthorityResourceCode;
     /**
     *记录创建时间
     */
     @Column(name = "MEMBER_AUTHORITY_CREATE_DATE",columnDefinition = "DATE")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Date memberAuthorityCreateDate;
     /**
     *记录排序号
     */
     @Column(name = "MEMBER_AUTHORITY_ORDER_BY",columnDefinition = "VARCHAR2")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String memberAuthorityOrderBy;
 
     public Long getpkId() {

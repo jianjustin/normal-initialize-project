@@ -25,13 +25,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 
 
 @RestController
-@RequestMapping("/member/resource")
+@Api(tags="member.resource",value="member.resource模块")
+@RequestMapping(value = "/member/resource",produces = { "application/json; charset=UTF-8" },consumes = {"text/plain", "application/json"})
 public class MemberResourceCotrollor{
     @Autowired
 	private MemberResourceService memberResourceService;
@@ -40,16 +42,16 @@ public class MemberResourceCotrollor{
     @Autowired
 	private MemberResourceRepository memberResourceRepository;
     
-    @ApiOperation(value="数据插入", notes="创建member_resource数据",response = MemberResource.class, tags = { "member.resource",})
-    @RequestMapping(value="/save", method=RequestMethod.POST, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/json"})
+    @ApiOperation(value="数据插入")
+    @RequestMapping(value="/save", method=RequestMethod.POST)
 	public ResponseEntity<?> save(
 			@ApiParam(value = "member_resource数据", required = true) @RequestBody MemberResource memberResource) {
     	memberResourceService.save(memberResource);
 		return new ResponseEntity<MemberResource>(HttpStatus.OK);
 	}
     
-    @ApiOperation(value="数据删除", notes="删除member_resource数据",response = MemberResource.class, tags = { "member.resource",})
-    @RequestMapping(value="/delete/{memberResourceCode}", method=RequestMethod.DELETE, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/json"})
+    @ApiOperation(value="数据删除")
+    @RequestMapping(value="/delete/{memberResourceCode}", method=RequestMethod.DELETE)
 	public ResponseEntity<?> delete(
 			@ApiParam(value = "member_resource数据code", required = true) @PathVariable String memberResourceCode) {
 		MemberResource oldMemberResource = memberResourceRepository.findByMemberResourceCode(memberResourceCode);
@@ -57,24 +59,24 @@ public class MemberResourceCotrollor{
 		return new ResponseEntity<MemberResource>(HttpStatus.OK);
 	}
     
-    @ApiOperation(value="数据更新", notes="更新member_resource数据",response = MemberResource.class, tags = { "member.resource",})
-    @RequestMapping(value="/update", method=RequestMethod.PUT, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/json"})
+    @ApiOperation(value="数据更新")
+    @RequestMapping(value="/update", method=RequestMethod.PUT)
 	public ResponseEntity<?> update(
 			@ApiParam(value = "member_resource数据", required = true) @RequestBody MemberResource memberResource) {
 		memberResourceService.update(memberResource);
 		return new ResponseEntity<MemberResource>(HttpStatus.OK);
 	}
 	
-    @ApiOperation(value="数据查询", notes="查询member_resource数据",response = MemberResource.class, tags = { "member.resource",})
-    @RequestMapping(value="/queryByCode/{memberResourceCode}", method=RequestMethod.GET, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/*"})
+    @ApiOperation(value="数据查询")
+    @RequestMapping(value="/queryByCode/{memberResourceCode}", method=RequestMethod.GET)
     public ResponseEntity<?> queryByCode(
 			@ApiParam(value = "member_resource数据code", required = true) @PathVariable String memberResourceCode) {
 		MemberResource memberResource = memberResourceRepository.findByMemberResourceCode(memberResourceCode);
 		return ResponseManager.handerResponse(MemberResource.class,memberResource, null, HttpStatus.OK, "成功获取数据", null, null);
 	}
 	
-	@ApiOperation(value="数据分页查询", notes="查询member_resource数据",response = ResponseDomain.class, tags = { "member.resource",})
-    @RequestMapping(value="/queryByPage", method=RequestMethod.POST, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/json; charset=UTF-8"})
+	@ApiOperation(value="数据分页查询")
+    @RequestMapping(value="/queryByPage", method=RequestMethod.POST)
     public ResponseEntity<?> queryByPage(
 			@ApiParam(value = "member_resource查询条件") @RequestBody MemberResourceView memberResourceView) {
     	/*1. 数据校验*/
@@ -92,8 +94,8 @@ public class MemberResourceCotrollor{
 		return ResponseManager.handerResponse(MemberResource.class,null, list, HttpStatus.OK, "成功获取数据列表", null, pageTools);
 	}
     
-    @ApiOperation(value="数据查询所有", notes="查询member_resource数据",response = ResponseDomain.class, tags = { "member.resource",})
-    @RequestMapping(value="/queryAll", method=RequestMethod.POST, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/json; charset=UTF-8"})
+    @ApiOperation(value="数据查询所有")
+    @RequestMapping(value="/queryAll", method=RequestMethod.POST)
     public ResponseEntity<?> queryAll(
 			@ApiParam(value = "member_resource查询条件") @RequestBody MemberResourceView memberResourceView) {
     	/*1. 数据校验*/

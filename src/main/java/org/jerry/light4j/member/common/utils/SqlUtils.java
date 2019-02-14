@@ -13,7 +13,8 @@ import org.jerry.light4j.member.common.utils.StringUtils;
 public class SqlUtils {
 	
 	public static List<Object> paramValueList;
-	public static final String initSql = "select t from modelName t where 1=1";
+	public static final String initSql = "select pkId from modelName t where 1=1";
+	public static final String databaseName = "test";
 	
 	/**
 	 * 重置参数集

@@ -8,11 +8,10 @@ import org.springframework.stereotype.Repository;
 
 /********************************************
  * 实体操作接口
- * @author janine
- * @since 2017-12-12
+ * @author tools
  *********************************************/
 @Repository
 public interface MemberUserRepository extends BaseMotifyRepository<MemberUser, Serializable>{
 
-	
+	public MemberUser findByMemberUserCode(String memberUserCode);
 }

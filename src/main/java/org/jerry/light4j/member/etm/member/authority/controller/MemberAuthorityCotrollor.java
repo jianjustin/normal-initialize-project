@@ -24,13 +24,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 
 
 @RestController
-@RequestMapping("/member/authority")
+@Api(tags="member.authority",value="用户权限模块")
+@RequestMapping(value = "/member/authority/",produces = { "application/json; charset=UTF-8" },consumes = {"text/plain", "application/json"})
 public class MemberAuthorityCotrollor{
     @Autowired
 	private MemberAuthorityService memberAuthorityService;
@@ -39,16 +41,16 @@ public class MemberAuthorityCotrollor{
     @Autowired
 	private MemberAuthorityRepository memberAuthorityRepository;
     
-    @ApiOperation(value="数据插入", notes="创建member_authority数据",response = MemberAuthority.class, tags = { "member.authority",})
-    @RequestMapping(value="/save", method=RequestMethod.POST, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/json"})
+    @ApiOperation(value="新增权限")
+    @RequestMapping(value="/save", method=RequestMethod.POST)
 	public ResponseEntity<?> save(
 			@ApiParam(value = "member_authority数据", required = true) @RequestBody MemberAuthority memberAuthority) {
     	memberAuthorityService.save(memberAuthority);
 		return new ResponseEntity<MemberAuthority>(HttpStatus.OK);
 	}
     
-    @ApiOperation(value="数据删除", notes="删除member_authority数据",response = MemberAuthority.class, tags = { "member.authority",})
-    @RequestMapping(value="/delete/{memberAuthorityCode}", method=RequestMethod.DELETE, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/json"})
+    @ApiOperation(value="数据删除")
+    @RequestMapping(value="/delete/{memberAuthorityCode}", method=RequestMethod.DELETE)
 	public ResponseEntity<?> delete(
 			@ApiParam(value = "member_authority数据code", required = true) @PathVariable String memberAuthorityCode) {
 		MemberAuthority oldMemberAuthority = memberAuthorityRepository.findByMemberAuthorityCode(memberAuthorityCode);
@@ -56,24 +58,24 @@ public class MemberAuthorityCotrollor{
 		return new ResponseEntity<MemberAuthority>(HttpStatus.OK);
 	}
     
-    @ApiOperation(value="数据更新", notes="更新member_authority数据",response = MemberAuthority.class, tags = { "member.authority",})
-    @RequestMapping(value="/update", method=RequestMethod.PUT, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/json"})
+    @ApiOperation(value="数据更新")
+    @RequestMapping(value="/update", method=RequestMethod.PUT)
 	public ResponseEntity<?> update(
 			@ApiParam(value = "member_authority数据", required = true) @RequestBody MemberAuthority memberAuthority) {
 		memberAuthorityService.update(memberAuthority);
 		return new ResponseEntity<MemberAuthority>(HttpStatus.OK);
 	}
 	
-    @ApiOperation(value="数据查询", notes="查询member_authority数据",response = MemberAuthority.class, tags = { "member.authority",})
-    @RequestMapping(value="/queryByCode/{memberAuthorityCode}", method=RequestMethod.GET, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/*"})
+    @ApiOperation(value="数据查询")
+    @RequestMapping(value="/queryByCode/{memberAuthorityCode}", method=RequestMethod.GET)
     public ResponseEntity<?> queryByCode(
 			@ApiParam(value = "member_authority数据code", required = true) @PathVariable String memberAuthorityCode) {
 		MemberAuthority memberAuthority = memberAuthorityRepository.findByMemberAuthorityCode(memberAuthorityCode);
 		return ResponseManager.handerResponse(MemberAuthority.class,memberAuthority, null, HttpStatus.OK, "成功获取数据", null, null);
 	}
 	
-	@ApiOperation(value="数据分页查询", notes="查询member_authority数据",response = ResponseDomain.class, tags = { "member.authority",})
-    @RequestMapping(value="/queryByPage", method=RequestMethod.POST, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/json; charset=UTF-8"})
+	@ApiOperation(value="数据分页查询")
+    @RequestMapping(value="/queryByPage", method=RequestMethod.POST)
     public ResponseEntity<?> queryByPage(
 			@ApiParam(value = "member_authority查询条件") @RequestBody MemberAuthorityView memberAuthorityView) {
     	/*1. 数据校验*/
@@ -91,14 +93,15 @@ public class MemberAuthorityCotrollor{
 		return ResponseManager.handerResponse(MemberAuthority.class,null, list, HttpStatus.OK, "成功获取数据列表", null, pageTools);
 	}
     
-    @ApiOperation(value="数据查询所有", notes="查询member_authority数据",response = ResponseDomain.class, tags = { "member.authority",})
-    @RequestMapping(value="/queryAll", method=RequestMethod.POST, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/json; charset=UTF-8"})
+    @ApiOperation(value="数据查询所有")
+    @RequestMapping(value="/queryAll", method=RequestMethod.POST)
     public ResponseEntity<?> queryAll(
 			@ApiParam(value = "member_authority查询条件") @RequestBody MemberAuthorityView memberAuthorityView) {
     	/*1. 数据校验*/
     	/*2. SQL组装*/
     	String sql = SqlUtils.getInitSql("MemberAuthority");
     	/*3. 数据查询*/
+    	System.out.println(sql);
     	List<MemberAuthority> list = baseQueryRepositoryImpl.queryAllByJPQL(sql, SqlUtils.createParamValueList(), MemberAuthority.class);
     	/*4. 数据总量查询*/
     	int count = baseQueryRepositoryImpl.queryCountByJPQL(sql,  SqlUtils.createParamValueList(), MemberAuthority.class);

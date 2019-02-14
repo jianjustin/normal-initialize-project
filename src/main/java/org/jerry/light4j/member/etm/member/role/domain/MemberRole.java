@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -18,6 +19,7 @@ public class MemberRole{
     /**
     *主键ID
     */
+	@Id
     @Column(name = "PK_ID",columnDefinition = "BIGINT")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pkId;

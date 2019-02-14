@@ -19,6 +19,7 @@ public class MemberResource{
     /**
     *主键ID
     */
+	@Id
     @Column(name = "PK_ID",columnDefinition = "BIGINT")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pkId;

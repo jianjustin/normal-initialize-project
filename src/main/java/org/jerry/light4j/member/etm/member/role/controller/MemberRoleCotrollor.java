@@ -7,7 +7,6 @@ import org.jerry.light4j.member.common.base.repository.impl.BaseQueryRepositoryI
 import org.jerry.light4j.member.common.page.PageQueryBean;
 import org.jerry.light4j.member.common.page.PageTools;
 import org.jerry.light4j.member.common.page.PageUtils;
-import org.jerry.light4j.member.common.response.ResponseDomain;
 import org.jerry.light4j.member.common.response.ResponseManager;
 import org.jerry.light4j.member.common.utils.SqlUtils;
 import org.jerry.light4j.member.common.utils.StringUtils;
@@ -24,13 +23,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 
 
 @RestController
-@RequestMapping("/member/role")
+@Api(tags="member.role",value="用户权限模块")
+@RequestMapping(value = "/member/role",produces = { "application/json; charset=UTF-8" },consumes = {"text/plain", "application/json"})
 public class MemberRoleCotrollor{
     @Autowired
 	private MemberRoleService memberRoleService;
@@ -39,16 +40,16 @@ public class MemberRoleCotrollor{
     @Autowired
 	private MemberRoleRepository memberRoleRepository;
     
-    @ApiOperation(value="数据插入", notes="创建member_role数据",response = MemberRole.class, tags = { "member.role",})
-    @RequestMapping(value="/save", method=RequestMethod.POST, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/json"})
+    @ApiOperation(value="数据插入")
+    @RequestMapping(value="/save", method=RequestMethod.POST)
 	public ResponseEntity<?> save(
 			@ApiParam(value = "member_role数据", required = true) @RequestBody MemberRole memberRole) {
     	memberRoleService.save(memberRole);
 		return new ResponseEntity<MemberRole>(HttpStatus.OK);
 	}
     
-    @ApiOperation(value="数据删除", notes="删除member_role数据",response = MemberRole.class, tags = { "member.role",})
-    @RequestMapping(value="/delete/{memberRoleCode}", method=RequestMethod.DELETE, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/json"})
+    @ApiOperation(value="数据删除")
+    @RequestMapping(value="/delete/{memberRoleCode}", method=RequestMethod.DELETE)
 	public ResponseEntity<?> delete(
 			@ApiParam(value = "member_role数据code", required = true) @PathVariable String memberRoleCode) {
 		MemberRole oldMemberRole = memberRoleRepository.findByMemberRoleCode(memberRoleCode);
@@ -56,7 +57,7 @@ public class MemberRoleCotrollor{
 		return new ResponseEntity<MemberRole>(HttpStatus.OK);
 	}
     
-    @ApiOperation(value="数据更新", notes="更新member_role数据",response = MemberRole.class, tags = { "member.role",})
+    @ApiOperation(value="数据更新")
     @RequestMapping(value="/update", method=RequestMethod.PUT, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/json"})
 	public ResponseEntity<?> update(
 			@ApiParam(value = "member_role数据", required = true) @RequestBody MemberRole memberRole) {
@@ -64,16 +65,16 @@ public class MemberRoleCotrollor{
 		return new ResponseEntity<MemberRole>(HttpStatus.OK);
 	}
 	
-    @ApiOperation(value="数据查询", notes="查询member_role数据",response = MemberRole.class, tags = { "member.role",})
-    @RequestMapping(value="/queryByCode/{memberRoleCode}", method=RequestMethod.GET, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/*"})
+    @ApiOperation(value="数据查询")
+    @RequestMapping(value="/queryByCode/{memberRoleCode}", method=RequestMethod.GET)
     public ResponseEntity<?> queryByCode(
 			@ApiParam(value = "member_role数据code", required = true) @PathVariable String memberRoleCode) {
 		MemberRole memberRole = memberRoleRepository.findByMemberRoleCode(memberRoleCode);
 		return ResponseManager.handerResponse(MemberRole.class,memberRole, null, HttpStatus.OK, "成功获取数据", null, null);
 	}
 	
-	@ApiOperation(value="数据分页查询", notes="查询member_role数据",response = ResponseDomain.class, tags = { "member.role",})
-    @RequestMapping(value="/queryByPage", method=RequestMethod.POST, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/json; charset=UTF-8"})
+	@ApiOperation(value="数据分页查询")
+    @RequestMapping(value="/queryByPage", method=RequestMethod.POST)
     public ResponseEntity<?> queryByPage(
 			@ApiParam(value = "member_role查询条件") @RequestBody MemberRoleView memberRoleView) {
     	/*1. 数据校验*/
@@ -91,7 +92,7 @@ public class MemberRoleCotrollor{
 		return ResponseManager.handerResponse(MemberRole.class,null, list, HttpStatus.OK, "成功获取数据列表", null, pageTools);
 	}
     
-    @ApiOperation(value="数据查询所有", notes="查询member_role数据",response = ResponseDomain.class, tags = { "member.role",})
+    @ApiOperation(value="数据查询所有")
     @RequestMapping(value="/queryAll", method=RequestMethod.POST, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/json; charset=UTF-8"})
     public ResponseEntity<?> queryAll(
 			@ApiParam(value = "member_role查询条件") @RequestBody MemberRoleView memberRoleView) {
