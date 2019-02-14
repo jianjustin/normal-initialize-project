@@ -1,5 +1,7 @@
 package org.jerry.light4j.member.etm.member.user.domain;
-import java.util.Date;
+
+import java.math.BigInteger;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +22,7 @@ public class MemberUser{
     *主键ID
     */
 	@Id
-    @Column(name = "PK_ID",columnDefinition = "BIGINT")
+    @Column(name = "PK_ID",columnDefinition = "INT")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pkId;
     /**
