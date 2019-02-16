@@ -1,7 +1,7 @@
 package org.normal.framework.common.swagger;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * 页面重定向--默认跳转swagger页面
@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 	
-
-	@RequestMapping(value = "/")
+	@GetMapping(value = "/")
 	public String index() {
-		return "redirect:swagger-ui.html";
+		return "redirect:login.html";
 	}
 	
 }

@@ -73,7 +73,7 @@ public class SpringSecurityHandlerConfig {
 			@Override
 			public void commence(HttpServletRequest request, HttpServletResponse response,
 					AuthenticationException authException) throws IOException, ServletException {
-				System.out.println("未登录");
+				System.out.println("未登录"+request.getRequestURL());
 			}
 		};
 	}

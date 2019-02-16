@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -46,7 +45,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		http.authorizeRequests()
-				.antMatchers("/member/user/**","/member/role/**","/member/resource/**","/member/authority/**")
+				.antMatchers("/", "/*.html", "/favicon.ico", "/css/**", "/js/**", "/fonts/**", "/img/**","/static/**","/csrf","/swagger-ui.html","/api-docs/**", "/swagger-resources/**", "/webjars/**", "/pages/**")
 				.permitAll()
 				.anyRequest()
 				.authenticated();
@@ -64,11 +63,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		//http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 	
-	@Override
-	  public void configure(WebSecurity web) throws Exception {
-	     web.ignoring().antMatchers("/swagger-ui.html","/swagger-resources/**");
-	  }
-
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());

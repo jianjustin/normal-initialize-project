@@ -59,6 +59,17 @@ public class SwaggerConfig {
 				.enable(swaggerSwitch);
 	}
 	
+	@Bean
+	public Docket basicApi() {
+		return new Docket(DocumentationType.SWAGGER_2)
+				.groupName("basic")
+				.select()
+				.paths(PathSelectors.ant("/**"))
+				.build()
+				.apiInfo(apiInfo())
+				.enable(swaggerSwitch);
+	}
+	
 	
 	public ApiInfo apiInfo() {
 		return new ApiInfoBuilder()
