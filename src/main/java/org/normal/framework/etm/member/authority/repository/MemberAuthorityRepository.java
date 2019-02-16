@@ -1,6 +1,7 @@
 package org.normal.framework.etm.member.authority.repository;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.normal.framework.common.base.repository.BaseMotifyRepository;
 import org.normal.framework.etm.member.authority.domain.MemberAuthority;
@@ -14,4 +15,6 @@ import org.springframework.stereotype.Repository;
 public interface MemberAuthorityRepository extends BaseMotifyRepository<MemberAuthority, Serializable>{
 
 	public MemberAuthority findByMemberAuthorityCode(String memberAuthorityCode);
+	
+	public List<MemberAuthority> findByMemberAuthorityRoleCode(String memberAuthorityRoleCode);
 }

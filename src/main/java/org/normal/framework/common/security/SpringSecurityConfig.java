@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 /**
@@ -32,6 +33,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	private AuthenticationEntryPoint authenticationEntryPoint;
 	@Autowired
 	private UserDetailsService userDetailsService;
+	@Autowired
+	private SpringSecurityTokenFilter springSecurityTokenFilter;
 
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -60,12 +63,63 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		        .logoutUrl("/logout")
 		        .logoutSuccessHandler(logoutSuccessHandler);
 
-		//http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
+		//添加token拦截器
+		http.addFilterBefore(springSecurityTokenFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
+
+	public AuthenticationSuccessHandler getAuthenticationSuccessHandler() {
+		return authenticationSuccessHandler;
+	}
+
+	public void setAuthenticationSuccessHandler(AuthenticationSuccessHandler authenticationSuccessHandler) {
+		this.authenticationSuccessHandler = authenticationSuccessHandler;
+	}
+
+	public AuthenticationFailureHandler getAuthenticationFailureHandler() {
+		return authenticationFailureHandler;
+	}
+
+	public void setAuthenticationFailureHandler(AuthenticationFailureHandler authenticationFailureHandler) {
+		this.authenticationFailureHandler = authenticationFailureHandler;
+	}
+
+	public LogoutSuccessHandler getLogoutSuccessHandler() {
+		return logoutSuccessHandler;
+	}
+
+	public void setLogoutSuccessHandler(LogoutSuccessHandler logoutSuccessHandler) {
+		this.logoutSuccessHandler = logoutSuccessHandler;
+	}
+
+	public AuthenticationEntryPoint getAuthenticationEntryPoint() {
+		return authenticationEntryPoint;
+	}
+
+	public void setAuthenticationEntryPoint(AuthenticationEntryPoint authenticationEntryPoint) {
+		this.authenticationEntryPoint = authenticationEntryPoint;
+	}
+
+	public UserDetailsService getUserDetailsService() {
+		return userDetailsService;
+	}
+
+	public void setUserDetailsService(UserDetailsService userDetailsService) {
+		this.userDetailsService = userDetailsService;
+	}
+
+	public SpringSecurityTokenFilter getSpringSecurityTokenFilter() {
+		return springSecurityTokenFilter;
+	}
+
+	public void setSpringSecurityTokenFilter(SpringSecurityTokenFilter springSecurityTokenFilter) {
+		this.springSecurityTokenFilter = springSecurityTokenFilter;
+	}
+	
+	
 
 }

@@ -45,8 +45,9 @@
                 url : '/login',
                 data : $("#login-form").serialize(),
                 success : function(data) {
+                	alert(data.token);
                     localStorage.setItem("token", data.token);
-                    location.href = '/index.html';
+                    location.href = '/swagger-ui.html';
                 },
                 error : function(xhr, textStatus, errorThrown) {
                     var msg = xhr.responseText;

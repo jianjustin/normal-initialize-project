@@ -1,9 +1,13 @@
 package org.normal.framework.common.response;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.normal.framework.common.page.PageTools;
+import org.normal.framework.common.utils.JsonUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
@@ -47,6 +51,11 @@ public class ResponseManager {
 		responseDomain.setDomainList(domainList);
 		ResponseEntity<ResponseDomain<T>> responseEntity = new ResponseEntity<ResponseDomain<T>>(responseDomain,status);
 		return responseEntity;
+	}
+	
+	public static void handerJsonResponse(HttpServletResponse response, int status, Object data) throws IOException {
+		response.setStatus(status);
+		response.getWriter().write(JsonUtils.toJson(data));
 	}
 
 }

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * 页面重定向--默认跳转swagger页面
- * @author jerry
+ * @author chenjianrui
  *
  */
 @Controller
