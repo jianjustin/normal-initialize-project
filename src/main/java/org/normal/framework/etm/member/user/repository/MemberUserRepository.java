@@ -14,4 +14,6 @@ import org.springframework.stereotype.Repository;
 public interface MemberUserRepository extends BaseMotifyRepository<MemberUser, Serializable>{
 
 	public MemberUser findByMemberUserCode(String memberUserCode);
+	
+	public MemberUser findByMemberUserLoginAccountAndMemberUserLoginPassword(String memberUserLoginAccount,String MemberUserLoginPassword);
 }

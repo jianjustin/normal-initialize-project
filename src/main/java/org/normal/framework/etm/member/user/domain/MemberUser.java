@@ -76,82 +76,73 @@ public class MemberUser{
     */
     @Column(name = "MEMBER_USER_ORDER_BY",columnDefinition = "VARCHAR2")
     private String memberUserOrderBy;
+	public Long getPkId() {
+		return pkId;
+	}
+	public void setPkId(Long pkId) {
+		this.pkId = pkId;
+	}
+	public String getMemberUserCode() {
+		return memberUserCode;
+	}
+	public void setMemberUserCode(String memberUserCode) {
+		this.memberUserCode = memberUserCode;
+	}
+	public String getMemberUserName() {
+		return memberUserName;
+	}
+	public void setMemberUserName(String memberUserName) {
+		this.memberUserName = memberUserName;
+	}
+	public String getMemberUserLoginAccount() {
+		return memberUserLoginAccount;
+	}
+	public void setMemberUserLoginAccount(String memberUserLoginAccount) {
+		this.memberUserLoginAccount = memberUserLoginAccount;
+	}
+	public String getMemberUserLoginPassword() {
+		return memberUserLoginPassword;
+	}
+	public void setMemberUserLoginPassword(String memberUserLoginPassword) {
+		this.memberUserLoginPassword = memberUserLoginPassword;
+	}
+	public String getMemberUserTokenId() {
+		return memberUserTokenId;
+	}
+	public void setMemberUserTokenId(String memberUserTokenId) {
+		this.memberUserTokenId = memberUserTokenId;
+	}
+	public String getMemberUserRoleCode() {
+		return memberUserRoleCode;
+	}
+	public void setMemberUserRoleCode(String memberUserRoleCode) {
+		this.memberUserRoleCode = memberUserRoleCode;
+	}
+	public String getMemberUserPhoneNumber() {
+		return memberUserPhoneNumber;
+	}
+	public void setMemberUserPhoneNumber(String memberUserPhoneNumber) {
+		this.memberUserPhoneNumber = memberUserPhoneNumber;
+	}
+	public String getMemberUserEmail() {
+		return memberUserEmail;
+	}
+	public void setMemberUserEmail(String memberUserEmail) {
+		this.memberUserEmail = memberUserEmail;
+	}
+	public Date getMemberUserCreateDate() {
+		return memberUserCreateDate;
+	}
+	public void setMemberUserCreateDate(Date memberUserCreateDate) {
+		this.memberUserCreateDate = memberUserCreateDate;
+	}
+	public String getMemberUserOrderBy() {
+		return memberUserOrderBy;
+	}
+	public void setMemberUserOrderBy(String memberUserOrderBy) {
+		this.memberUserOrderBy = memberUserOrderBy;
+	}
 
-    public Long getpkId() {
-        return this.pkId;
-    }
-    public void setpkId(Long pkId) {
-        this.pkId = pkId;
-    }
-	
-    public String getmemberUserCode() {
-        return this.memberUserCode;
-    }
-    public void setmemberUserCode(String memberUserCode) {
-        this.memberUserCode = memberUserCode;
-    }
-	
-    public String getmemberUserName() {
-        return this.memberUserName;
-    }
-    public void setmemberUserName(String memberUserName) {
-        this.memberUserName = memberUserName;
-    }
-	
-    public String getmemberUserLoginAccount() {
-        return this.memberUserLoginAccount;
-    }
-    public void setmemberUserLoginAccount(String memberUserLoginAccount) {
-        this.memberUserLoginAccount = memberUserLoginAccount;
-    }
-	
-    public String getmemberUserLoginPassword() {
-        return this.memberUserLoginPassword;
-    }
-    public void setmemberUserLoginPassword(String memberUserLoginPassword) {
-        this.memberUserLoginPassword = memberUserLoginPassword;
-    }
-	
-    public String getmemberUserTokenId() {
-        return this.memberUserTokenId;
-    }
-    public void setmemberUserTokenId(String memberUserTokenId) {
-        this.memberUserTokenId = memberUserTokenId;
-    }
-	
-    public String getmemberUserRoleCode() {
-        return this.memberUserRoleCode;
-    }
-    public void setmemberUserRoleCode(String memberUserRoleCode) {
-        this.memberUserRoleCode = memberUserRoleCode;
-    }
-	
-    public String getmemberUserPhoneNumber() {
-        return this.memberUserPhoneNumber;
-    }
-    public void setmemberUserPhoneNumber(String memberUserPhoneNumber) {
-        this.memberUserPhoneNumber = memberUserPhoneNumber;
-    }
-	
-    public String getmemberUserEmail() {
-        return this.memberUserEmail;
-    }
-    public void setmemberUserEmail(String memberUserEmail) {
-        this.memberUserEmail = memberUserEmail;
-    }
-	
-    public Date getmemberUserCreateDate() {
-        return this.memberUserCreateDate;
-    }
-    public void setmemberUserCreateDate(Date memberUserCreateDate) {
-        this.memberUserCreateDate = memberUserCreateDate;
-    }
-	
-    public String getmemberUserOrderBy() {
-        return this.memberUserOrderBy;
-    }
-    public void setmemberUserOrderBy(String memberUserOrderBy) {
-        this.memberUserOrderBy = memberUserOrderBy;
-    }
+    
 	
 }
