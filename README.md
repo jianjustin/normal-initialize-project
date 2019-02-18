@@ -1,12 +1,25 @@
 ### normal-initialize-project
-![springboot-learning-demo](https://img.shields.io/badge/springboot--learning--demo-1.0.0-lightgrey.svg)
+![normal-initialize-project](https://img.shields.io/badge/normal.initialize.project-1.0.0-orange.svg)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
 #### 概述
 
-springboot基础实现，用于项目初始化以及技术栈植入测试
+springboot标准化脚手架，用于项目初始化以及技术栈植入测试
 
 #### 技术结构
+
+
+* [X] Spring Boot
+* [X] Spring Data
+* [X] Spring MVC
+* [X] Swagger 2.0
+* [X] springfox
+* [X] Spring Security
+* [ ] redis
+* [ ] mybatis
+* [ ] ActiveMQ
+* [ ] Spring Statemachine
+* [ ] Spring Web Flow
 
 
 
@@ -35,33 +48,33 @@ springboot基础实现，用于项目初始化以及技术栈植入测试
    spring.datasource.driver-class-name=com.mysql.jdbc.Driver
   ```
 
-* 创建用户表进行功能测试
+* 初始化表结构
 
+>根据`src/main/resources/sql`目录下表结构说明创建表结构
 
-  ```sql
-   create table member_user(
-      PK_ID                  bigint auto_increment comment '自增列',
-      MEMBER_USER_CODE       varchar(30)  not null comment '用户编号',
-      MEMBER_USER_NAME       varchar(100) null comment '用户名称',
-      MEMBER_USER_ACCOUNT    varchar(100) null comment '用户账号',
-      MEMBER_USER_PHONE      varchar(100) null comment '用户手机号',
-      MEMBER_USER_EMAIL      varchar(100) null comment '用户邮箱',
-      MEMBER_USER_PASSWORD   varchar(100) null comment '用户登录密码',
-      MEMBER_USER_TOKENID    varchar(100) null comment '用户token',
-      MEMBER_USER_LAST_DATE  datetime     null comment '用户最后登录时间',
-      MEMBER_USER_ROLE_CODE  varchar(10)  null comment '用户角色编号',
-      MEMBER_USER_LIST_ORDER varchar(10)  null comment '用户排序编号',
-      constraint member_user_PK_ID_uindex unique (PK_ID)
-    )comment '用户';
-  ```
+* 初始化表数据
 
-  ```sql
-    alter table member_user add primary key (PK_ID);
-  ```
+>根据`src/main/resources/sql`目录下`data`结尾`.sql`文件初始化数据
 
 * 启动应用
 
 通过启动springboot项目的方式启动应用,并访问`http://localhost:8080`进行测试
+
+#### 目前工作
+
+* [X] 数据库持久化操作--基于Spring Data
+* [X] token权限管理
+* [X] swagger API管理
+* [ ] 标准化OAuth2实现
+* [ ] 增加日志输出和标准化生成
+* [ ] 标准化事务处理机制
+* [ ] 添加状态机模型和工作流机制
+* [ ] 增加消息队列服务API
+* [ ] 单元测试覆盖
+* [ ] 应用状态监控 
+* [ ] 持久化框架引入MyBatis
+* [ ] 引入Spring WebFlux替换Spring MVC
+* [ ] 引入Spring Cloud重构项目主体代码
 
 #### 联系方式
 
