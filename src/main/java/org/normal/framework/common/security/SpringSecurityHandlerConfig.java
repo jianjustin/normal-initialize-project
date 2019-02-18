@@ -32,6 +32,8 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 @Configuration
 public class SpringSecurityHandlerConfig {
 
+
+
 	/**
 	 * 登陆成功，返回Token
 	 */
@@ -46,11 +48,15 @@ public class SpringSecurityHandlerConfig {
 				SpringSecurityUserDetails userDetails = (SpringSecurityUserDetails)authentication.getPrincipal();
 				String value = userDetails.getMemberUserCode()+""+date.getTime();//使用MD5替换token实现
 				String md5Value = MD5Utils.crypt(value);
+				System.out.println(md5Value);
 				BasicCacheUtils.addCache(md5Value, userDetails);
+				ResponseManager.handerJsonResponse(response, HttpStatus.OK.value(), md5Value);
+				//设置登录时间戳和过期时间戳
 				System.out.println("信息验证成功");
 			}
 		};
 	}
+
 
 	//登录失败
 	@Bean

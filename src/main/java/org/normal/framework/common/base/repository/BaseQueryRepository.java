@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.data.repository.NoRepositoryBean;
-import org.springframework.stereotype.Repository;
-
 /*****************************************************
  * 基础查询接口(返回查询实体列表,返回Map结构实体列表)
  * 查询方式:JPQL，SQL

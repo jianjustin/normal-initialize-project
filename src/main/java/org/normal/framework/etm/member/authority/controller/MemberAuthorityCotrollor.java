@@ -17,6 +17,7 @@ import org.normal.framework.etm.member.authority.service.MemberAuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ import io.swagger.annotations.ApiParam;
 
 @RestController
 @Api(tags="member.authority",value="用户权限模块")
-@RequestMapping(value = "/member/authority/",produces = { "application/json; charset=UTF-8" },consumes = {"text/plain", "application/json"})
+@RequestMapping(value = "/member/authority/",produces = { "application/json; charset=UTF-8" })
 public class MemberAuthorityCotrollor{
     @Autowired
 	private MemberAuthorityService memberAuthorityService;
@@ -42,6 +43,7 @@ public class MemberAuthorityCotrollor{
     
     @ApiOperation(value="新增权限")
     @RequestMapping(value="/save", method=RequestMethod.POST)
+    @PreAuthorize("hasAuthority('member.authority.save')")
 	public ResponseEntity<?> save(
 			@ApiParam(value = "member_authority数据", required = true) @RequestBody MemberAuthority memberAuthority) {
     	memberAuthorityService.save(memberAuthority);
@@ -50,6 +52,7 @@ public class MemberAuthorityCotrollor{
     
     @ApiOperation(value="数据删除")
     @RequestMapping(value="/delete/{memberAuthorityCode}", method=RequestMethod.DELETE)
+    @PreAuthorize("hasAuthority('member.authority.delete')")
 	public ResponseEntity<?> delete(
 			@ApiParam(value = "member_authority数据code", required = true) @PathVariable String memberAuthorityCode) {
 		MemberAuthority oldMemberAuthority = memberAuthorityRepository.findByMemberAuthorityCode(memberAuthorityCode);
@@ -59,6 +62,7 @@ public class MemberAuthorityCotrollor{
     
     @ApiOperation(value="数据更新")
     @RequestMapping(value="/update", method=RequestMethod.PUT)
+    @PreAuthorize("hasAuthority('member.authority.update')")
 	public ResponseEntity<?> update(
 			@ApiParam(value = "member_authority数据", required = true) @RequestBody MemberAuthority memberAuthority) {
 		memberAuthorityService.update(memberAuthority);
@@ -67,6 +71,7 @@ public class MemberAuthorityCotrollor{
 	
     @ApiOperation(value="数据查询")
     @RequestMapping(value="/queryByCode/{memberAuthorityCode}", method=RequestMethod.GET)
+    @PreAuthorize("hasAuthority('member.authority.queryByCode')")
     public ResponseEntity<?> queryByCode(
 			@ApiParam(value = "member_authority数据code", required = true) @PathVariable String memberAuthorityCode) {
 		MemberAuthority memberAuthority = memberAuthorityRepository.findByMemberAuthorityCode(memberAuthorityCode);
@@ -75,12 +80,15 @@ public class MemberAuthorityCotrollor{
 	
 	@ApiOperation(value="数据分页查询")
     @RequestMapping(value="/queryByPage", method=RequestMethod.POST)
+    @PreAuthorize("hasAuthority('member.authority.queryByPage')")
     public ResponseEntity<?> queryByPage(
 			@ApiParam(value = "member_authority查询条件") @RequestBody MemberAuthorityView memberAuthorityView) {
-    	/*1. 数据校验*/
-    	if(StringUtils.isBlank(memberAuthorityView.getPageQueryBean()))memberAuthorityView.setPageQueryBean(new PageQueryBean());
-    	if(StringUtils.isBlank(memberAuthorityView.getPageQueryBean().getPageNo()))memberAuthorityView.getPageQueryBean().setPageNo(1);
-    	if(StringUtils.isBlank(memberAuthorityView.getPageQueryBean().getPageSize()))memberAuthorityView.getPageQueryBean().setPageSize(10);
+        /*1. 数据校验*/
+        if(StringUtils.isBlank(memberAuthorityView.getPageQueryBean())){
+            memberAuthorityView.setPageQueryBean(new PageQueryBean());//未传入分页条件
+            memberAuthorityView.getPageQueryBean().setPageNo(1);
+            memberAuthorityView.getPageQueryBean().setPageSize(10);
+        }
     	/*2. SQL组装*/
     	String sql = SqlUtils.getInitSql("MemberAuthority");
     	/*3. 数据查询*/
@@ -94,6 +102,7 @@ public class MemberAuthorityCotrollor{
     
     @ApiOperation(value="数据查询所有")
     @RequestMapping(value="/queryAll", method=RequestMethod.POST)
+    @PreAuthorize("hasAuthority('member.authority.queryAll')")
     public ResponseEntity<?> queryAll(
 			@ApiParam(value = "member_authority查询条件") @RequestBody MemberAuthorityView memberAuthorityView) {
     	/*1. 数据校验*/

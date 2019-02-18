@@ -1,6 +1,5 @@
 package org.normal.framework.etm.member.user.domain;
 
-import java.math.BigInteger;
 import java.sql.Date;
 
 import javax.persistence.Column;

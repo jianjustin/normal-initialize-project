@@ -3,7 +3,6 @@ package org.normal.framework.common.security;
 import java.util.Collection;
 import java.util.List;
 
-import org.normal.framework.etm.member.authority.domain.MemberAuthority;
 import org.normal.framework.etm.member.user.domain.MemberUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +11,7 @@ public class SpringSecurityUserDetails extends MemberUser implements UserDetails
 
 	private static final long serialVersionUID = 2545548904581565888L;
 
-	private List<MemberAuthority> memberAuthorityList;//用户权限数据
+    private List<CustomGrantedAuthority> customGrantedAuthorityList;
 	private String token;//用户会话token
 	private Long loginTime;//登陆时间戳
 	private Long expireTime;//过期时间戳
@@ -21,8 +20,7 @@ public class SpringSecurityUserDetails extends MemberUser implements UserDetails
 	 */
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		
-		return null;
+		return customGrantedAuthorityList;
 	}
 
 	@Override
@@ -55,13 +53,7 @@ public class SpringSecurityUserDetails extends MemberUser implements UserDetails
 		return true;
 	}
 
-	public List<MemberAuthority> getMemberAuthorityList() {
-		return memberAuthorityList;
-	}
 
-	public void setMemberAuthorityList(List<MemberAuthority> memberAuthorityList) {
-		this.memberAuthorityList = memberAuthorityList;
-	}
 
 	public String getToken() {
 		return token;
@@ -86,7 +78,12 @@ public class SpringSecurityUserDetails extends MemberUser implements UserDetails
 	public void setExpireTime(Long expireTime) {
 		this.expireTime = expireTime;
 	}
-	
-	
 
+    public List<CustomGrantedAuthority> getCustomGrantedAuthorityList() {
+        return customGrantedAuthorityList;
+    }
+
+    public void setCustomGrantedAuthorityList(List<CustomGrantedAuthority> customGrantedAuthorityList) {
+        this.customGrantedAuthorityList = customGrantedAuthorityList;
+    }
 }

@@ -17,6 +17,7 @@ import org.normal.framework.etm.member.role.service.MemberRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ import io.swagger.annotations.ApiParam;
 
 @RestController
 @Api(tags="member.role",value="用户权限模块")
-@RequestMapping(value = "/member/role",produces = { "application/json; charset=UTF-8" },consumes = {"text/plain", "application/json"})
+@RequestMapping(value = "/member/role",produces = { "application/json; charset=UTF-8" })
 public class MemberRoleCotrollor{
     @Autowired
 	private MemberRoleService memberRoleService;
@@ -42,6 +43,7 @@ public class MemberRoleCotrollor{
     
     @ApiOperation(value="数据插入")
     @RequestMapping(value="/save", method=RequestMethod.POST)
+    @PreAuthorize("hasAuthority('member.role.save')")
 	public ResponseEntity<?> save(
 			@ApiParam(value = "member_role数据", required = true) @RequestBody MemberRole memberRole) {
     	memberRoleService.save(memberRole);
@@ -50,6 +52,7 @@ public class MemberRoleCotrollor{
     
     @ApiOperation(value="数据删除")
     @RequestMapping(value="/delete/{memberRoleCode}", method=RequestMethod.DELETE)
+    @PreAuthorize("hasAuthority('member.role.delete')")
 	public ResponseEntity<?> delete(
 			@ApiParam(value = "member_role数据code", required = true) @PathVariable String memberRoleCode) {
 		MemberRole oldMemberRole = memberRoleRepository.findByMemberRoleCode(memberRoleCode);
@@ -59,6 +62,7 @@ public class MemberRoleCotrollor{
     
     @ApiOperation(value="数据更新")
     @RequestMapping(value="/update", method=RequestMethod.PUT, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/json"})
+    @PreAuthorize("hasAuthority('member.role.update')")
 	public ResponseEntity<?> update(
 			@ApiParam(value = "member_role数据", required = true) @RequestBody MemberRole memberRole) {
 		memberRoleService.update(memberRole);
@@ -67,6 +71,7 @@ public class MemberRoleCotrollor{
 	
     @ApiOperation(value="数据查询")
     @RequestMapping(value="/queryByCode/{memberRoleCode}", method=RequestMethod.GET)
+    @PreAuthorize("hasAuthority('member.role.queryByCode')")
     public ResponseEntity<?> queryByCode(
 			@ApiParam(value = "member_role数据code", required = true) @PathVariable String memberRoleCode) {
 		MemberRole memberRole = memberRoleRepository.findByMemberRoleCode(memberRoleCode);
@@ -75,12 +80,15 @@ public class MemberRoleCotrollor{
 	
 	@ApiOperation(value="数据分页查询")
     @RequestMapping(value="/queryByPage", method=RequestMethod.POST)
+    @PreAuthorize("hasAuthority('member.role.queryByPage')")
     public ResponseEntity<?> queryByPage(
 			@ApiParam(value = "member_role查询条件") @RequestBody MemberRoleView memberRoleView) {
-    	/*1. 数据校验*/
-    	if(StringUtils.isBlank(memberRoleView.getPageQueryBean()))memberRoleView.setPageQueryBean(new PageQueryBean());
-    	if(StringUtils.isBlank(memberRoleView.getPageQueryBean().getPageNo()))memberRoleView.getPageQueryBean().setPageNo(1);
-    	if(StringUtils.isBlank(memberRoleView.getPageQueryBean().getPageSize()))memberRoleView.getPageQueryBean().setPageSize(10);
+        /*1. 数据校验*/
+        if(StringUtils.isBlank(memberRoleView.getPageQueryBean())){
+            memberRoleView.setPageQueryBean(new PageQueryBean());//未传入分页条件
+            memberRoleView.getPageQueryBean().setPageNo(1);
+            memberRoleView.getPageQueryBean().setPageSize(10);
+        }
     	/*2. SQL组装*/
     	String sql = SqlUtils.getInitSql("MemberRole");
     	/*3. 数据查询*/
@@ -94,6 +102,7 @@ public class MemberRoleCotrollor{
     
     @ApiOperation(value="数据查询所有")
     @RequestMapping(value="/queryAll", method=RequestMethod.POST, produces = "application/json; charset=UTF-8", consumes = {"text/plain", "application/json; charset=UTF-8"})
+    @PreAuthorize("hasAuthority('member.role.queryAll')")
     public ResponseEntity<?> queryAll(
 			@ApiParam(value = "member_role查询条件") @RequestBody MemberRoleView memberRoleView) {
     	/*1. 数据校验*/

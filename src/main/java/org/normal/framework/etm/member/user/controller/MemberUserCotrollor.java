@@ -17,6 +17,7 @@ import org.normal.framework.etm.member.user.service.MemberUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ import io.swagger.annotations.ApiParam;
 
 @RestController
 @Api(tags="member.user",value="member.user模块")
-@RequestMapping(value = "/member/user",produces = { "application/json; charset=UTF-8" },consumes = {"text/plain", "application/json"})
+@RequestMapping(value = "/member/user",produces = { "application/json; charset=UTF-8" })
 public class MemberUserCotrollor{
     @Autowired
 	private MemberUserService memberUserService;
@@ -42,6 +43,7 @@ public class MemberUserCotrollor{
     
     @ApiOperation(value="数据插入")
     @RequestMapping(value="/save", method=RequestMethod.POST)
+    @PreAuthorize("hasAuthority('member.user.save')")
 	public ResponseEntity<?> save(
 			@ApiParam(value = "member_user数据", required = true) @RequestBody MemberUser memberUser) {
     	memberUserService.save(memberUser);
@@ -50,6 +52,7 @@ public class MemberUserCotrollor{
     
     @ApiOperation(value="数据删除")
     @RequestMapping(value="/delete/{memberUserCode}", method=RequestMethod.DELETE)
+    @PreAuthorize("hasAuthority('member.user.delete')")
 	public ResponseEntity<?> delete(
 			@ApiParam(value = "member_user数据code", required = true) @PathVariable String memberUserCode) {
 		MemberUser oldMemberUser = memberUserRepository.findByMemberUserCode(memberUserCode);
@@ -59,6 +62,7 @@ public class MemberUserCotrollor{
     
     @ApiOperation(value="数据更新")
     @RequestMapping(value="/update", method=RequestMethod.PUT)
+    @PreAuthorize("hasAuthority('member.user.update')")
 	public ResponseEntity<?> update(
 			@ApiParam(value = "member_user数据", required = true) @RequestBody MemberUser memberUser) {
 		memberUserService.update(memberUser);
@@ -67,6 +71,7 @@ public class MemberUserCotrollor{
 	
     @ApiOperation(value="数据查询")
     @RequestMapping(value="/queryByCode/{memberUserCode}", method=RequestMethod.GET)
+    @PreAuthorize("hasAuthority('member.user.queryByCode')")
     public ResponseEntity<?> queryByCode(
 			@ApiParam(value = "member_user数据code", required = true) @PathVariable String memberUserCode) {
 		MemberUser memberUser = memberUserRepository.findByMemberUserCode(memberUserCode);
@@ -75,12 +80,15 @@ public class MemberUserCotrollor{
 	
 	@ApiOperation(value="数据分页查询")
     @RequestMapping(value="/queryByPage", method=RequestMethod.POST)
+    @PreAuthorize("hasAuthority('member.user.queryByPage')")
     public ResponseEntity<?> queryByPage(
 			@ApiParam(value = "member_user查询条件") @RequestBody MemberUserView memberUserView) {
     	/*1. 数据校验*/
-    	if(StringUtils.isBlank(memberUserView.getPageQueryBean()))memberUserView.setPageQueryBean(new PageQueryBean());
-    	if(StringUtils.isBlank(memberUserView.getPageQueryBean().getPageNo()))memberUserView.getPageQueryBean().setPageNo(1);
-    	if(StringUtils.isBlank(memberUserView.getPageQueryBean().getPageSize()))memberUserView.getPageQueryBean().setPageSize(10);
+    	if(StringUtils.isBlank(memberUserView.getPageQueryBean())){
+    	    memberUserView.setPageQueryBean(new PageQueryBean());//未传入分页条件
+            memberUserView.getPageQueryBean().setPageNo(1);
+            memberUserView.getPageQueryBean().setPageSize(10);
+        }
     	/*2. SQL组装*/
     	String sql = SqlUtils.getInitSql("MemberUser");
     	/*3. 数据查询*/
@@ -94,6 +102,7 @@ public class MemberUserCotrollor{
     
     @ApiOperation(value="数据查询所有")
     @RequestMapping(value="/queryAll", method=RequestMethod.POST)
+    @PreAuthorize("hasAuthority('member.user.queryAll')")
     public ResponseEntity<?> queryAll(
 			@ApiParam(value = "member_user查询条件") @RequestBody MemberUserView memberUserView) {
     	/*1. 数据校验*/

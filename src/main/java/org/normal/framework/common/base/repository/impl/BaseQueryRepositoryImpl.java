@@ -45,7 +45,7 @@ public class BaseQueryRepositoryImpl<T, ID extends Serializable> implements Base
 		return list;
 	}
 	
-	@SuppressWarnings({ "hiding", "unchecked" })
+	@SuppressWarnings({ "hiding" })
 	public int queryCountByJPQL(String jpql, List<Object> paramValueList,Class<T> clazz) {
 		if(null == paramValueList)paramValueList  = new ArrayList<Object>();
 		Query query = this.entityManager.createQuery(jpql,clazz);
@@ -93,7 +93,7 @@ public class BaseQueryRepositoryImpl<T, ID extends Serializable> implements Base
 		return list;
 	}
 	
-	@SuppressWarnings({ "unchecked", "hiding" })
+	@SuppressWarnings({ "hiding" })
 	public int queryCountBySQL(String sql, List<Object> paramValueList,Class<T> clazz) {
 		if(null==paramValueList)paramValueList = new ArrayList<Object>();
 		Query query = this.entityManager.createNativeQuery(sql,clazz);

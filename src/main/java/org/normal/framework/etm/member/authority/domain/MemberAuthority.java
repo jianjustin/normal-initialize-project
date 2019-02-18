@@ -1,5 +1,4 @@
 package org.normal.framework.etm.member.authority.domain;
-import java.math.BigInteger;
 import java.util.Date;
 
 import javax.persistence.Column;

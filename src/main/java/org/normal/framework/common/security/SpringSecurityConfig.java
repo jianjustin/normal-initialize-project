@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
  */
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
-	
+
 	@Autowired
 	private AuthenticationSuccessHandler authenticationSuccessHandler;
 	@Autowired

@@ -3,25 +3,21 @@ package org.normal.framework.common.swagger;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.ApiKey;
-import springfox.documentation.service.AuthorizationScope;
-import springfox.documentation.service.SecurityReference;
+import springfox.documentation.service.Parameter;
 import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger.web.DocExpansion;
 import springfox.documentation.swagger.web.ModelRendering;
 import springfox.documentation.swagger.web.OperationsSorter;
-import springfox.documentation.swagger.web.SecurityConfiguration;
-import springfox.documentation.swagger.web.SecurityConfigurationBuilder;
 import springfox.documentation.swagger.web.TagsSorter;
 import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger.web.UiConfigurationBuilder;
@@ -39,36 +35,54 @@ public class SwaggerConfig {
 	
 	@Bean
 	public Docket memberApi() {
+		ParameterBuilder tokenPar = new ParameterBuilder();
+		List<Parameter> pars = new ArrayList<Parameter>();
+		tokenPar.name("token").description("令牌").modelRef(new ModelRef("string")).parameterType("header").required(false).build();
+		pars.add(tokenPar.build());
+
 		return new Docket(DocumentationType.SWAGGER_2)
 				.groupName("member")
 				.select()
 				.paths(PathSelectors.ant("/member/**"))
 				.build()
+				.globalOperationParameters(pars)
 				.apiInfo(apiInfo())
 				.enable(swaggerSwitch);
 	}
 	
 	@Bean
 	public Docket systemApi() {
+		ParameterBuilder tokenPar = new ParameterBuilder();
+		List<Parameter> pars = new ArrayList<Parameter>();
+		tokenPar.name("token").description("令牌").modelRef(new ModelRef("string")).parameterType("header").required(false).build();
+		pars.add(tokenPar.build());
+
 		return new Docket(DocumentationType.SWAGGER_2)
 				.groupName("system")
 				.select()
 				.paths(PathSelectors.ant("/system/**"))
 				.build()
+				.globalOperationParameters(pars)
 				.apiInfo(apiInfo())
 				.enable(swaggerSwitch);
 	}
-	
-	@Bean
-	public Docket basicApi() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.groupName("basic")
-				.select()
-				.paths(PathSelectors.ant("/**"))
-				.build()
-				.apiInfo(apiInfo())
-				.enable(swaggerSwitch);
-	}
+
+    @Bean
+    public Docket securityApi() {
+        ParameterBuilder tokenPar = new ParameterBuilder();
+        List<Parameter> pars = new ArrayList<Parameter>();
+        tokenPar.name("token").description("令牌").modelRef(new ModelRef("string")).parameterType("header").required(false).build();
+        pars.add(tokenPar.build());
+
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("security")
+                .select()
+                .paths(PathSelectors.ant("/security/**"))
+                .build()
+                .globalOperationParameters(pars)
+                .apiInfo(apiInfo())
+                .enable(swaggerSwitch);
+    }
 	
 	
 	public ApiInfo apiInfo() {
@@ -78,41 +92,6 @@ public class SwaggerConfig {
 				.license("MIT License")
 				.build();
 	}
-	
-
-	  private ApiKey apiKey() {
-	    return new ApiKey("mykey", "api_key", "header");
-	  }
-
-	  private SecurityContext securityContext() {
-	    return SecurityContext.builder()
-	        .securityReferences(defaultAuth())
-	        .forPaths(PathSelectors.regex("/anyPath.*"))
-	        .build();
-	  }
-
-	  public List<SecurityReference> defaultAuth() {
-	    AuthorizationScope authorizationScope
-	        = new AuthorizationScope("global", "accessEverything");
-	    AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
-	    authorizationScopes[0] = authorizationScope;
-	    List<SecurityReference> list = new ArrayList<SecurityReference>();
-	    list.add(new SecurityReference("mykey", authorizationScopes));
-	    return list;
-	  }
-
-	  @Bean
-	  public SecurityConfiguration security() {
-	    return SecurityConfigurationBuilder.builder()
-	        .clientId("test-app-client-id")
-	        .clientSecret("test-app-client-secret")
-	        .realm("test-app-realm")
-	        .appName("test-app")
-	        .scopeSeparator(",")
-	        .additionalQueryStringParams(null)
-	        .useBasicAuthenticationWithAccessCodeGrant(false)
-	        .build();
-	  }
 	
 	/**
 	 * 配置swagger-ui
