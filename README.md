@@ -1,5 +1,6 @@
 ### normal-initialize-project
 ![normal-initialize-project](https://img.shields.io/badge/normal.initialize.project-1.0.0-orange.svg)
+![travis-CI-master](https://travis-ci.com/jianjustin/normal-initialize-project.svg?branch=master)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
 #### 概述
