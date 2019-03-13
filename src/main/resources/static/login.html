@@ -1,64 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" >
+
 <head>
-  	<meta charset="utf-8">
-  	<title>Login-Page</title>
-	<meta http-equiv="Pragma" content="no-cache">
-	<meta http-equiv="Cache-Control" content="no-cache">
-	<meta http-equiv="Expires" content="0">
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-<div class="container layui-container">
-
-	<div class="login">
-		<h1 class="login-label">后台管理登陆</h1>
-		<form id="login-form" class="layui-form" onsubmit="return false;" method="post"  >
-			<span id="info" style="color: red"></span>
-			<div class="layui-form-item">
-				<div class="layui-input-block"><input id="username" name="username" class="layui-input" type="text" placeholder="请输入账号"></div>
-			</div>
-			<div class="layui-form-item">
-				<div class="layui-input-block"><input id="password" name="password" class="layui-input" type="password" placeholder="请输入密码"></div>
-			</div>
-			<div class="layui-form-item">
-				<div class="layui-input-block"><button class="layui-btn submit-btn" type="submit" onclick="login(this)">登录</button></div>
-			</div>
-		</form>
-	</div>
-</div> 
-
-<script src="js/jquery-2.1.1.min.js"></script>
-<script type="text/javascript">
-
-    function login(obj) {
-        $(obj).attr("disabled", true);
-
-        var username = $.trim($('#username').val());
-        var password = $.trim($('#password').val());
-        if (username == "" || password == "") {
-            $("#info").html('用户名或者密码不能为空');
-            $(obj).attr("disabled", false);
-        } else {
-            $.ajax({
-                type : 'post',
-                url : '/login',
-                data : $("#login-form").serialize(),
-                success : function(data) {
-                    debugger;
-                    localStorage.setItem("token", data.token);
-                    location.href = '/swagger-ui.html';
-                },
-                error : function(xhr, textStatus, errorThrown) {
-                    var msg = xhr.responseText;
-                    var response = JSON.parse(msg);
-                    $("#info").html(response.message);
-                    $(obj).attr("disabled", false);
-                }
-            });
-
-        }
-    }
-</script>
+  <div class='wrap'>
+      Login
+        <form id="login-form" class="layui-form" onsubmit="return false;" method="post">
+            <input type='text' id='username' name="username" placeholder='Username'>
+            <input type='password' id='password' name="password" placeholder='Password'>
+        </form>
+      <button class='forgot'>FORGOT PASSWORD ?</button>
+      <button class='login' type="submit" onclick="login(this)">LOG IN</button>
+  </div>
+  <script src='js/jquery-2.1.1.min.js'></script>
+  <script  src="js/index.js"></script>
 </body>
+
 </html>
