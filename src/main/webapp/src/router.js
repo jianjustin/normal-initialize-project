@@ -1,13 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 
 Vue.use(Router)
 
-//import CommonList from '../components/common/CommonList.vue'
-const CommonList    = (resolve) => require(['./pages/template.vue'],resolve);
+const Template    = (resolve) => require(['./pages/template.vue'],resolve);
 const routes = [
-  { name: 'template', path: '/', component: CommonList }
+  { name: 'template', path: '/', component: Template }
 ];
 
 export default new Router({

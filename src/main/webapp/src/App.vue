@@ -125,7 +125,7 @@ export default {
                 icon: 'keyboard_arrow_up',
                 'icon-alt': 'keyboard_arrow_down',
                 text: 'Labels',
-                model: true,
+                model: false,
                 children: [
                     { icon: 'add', text: 'Create label' },
                 ],
