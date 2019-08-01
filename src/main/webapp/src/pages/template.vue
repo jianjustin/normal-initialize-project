@@ -24,6 +24,8 @@ export default {
     props: {
         source: String,
     },
-    data: () => ({}),
+    data: () => ({
+        dialog: false,
+    }),
 }
 </script>
