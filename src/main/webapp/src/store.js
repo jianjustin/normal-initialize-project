@@ -5,13 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-  	drawer: null,
-
+  	drawer: null,//设置左侧目录的显示和隐藏
   },
   mutations: {
-  	setDrawer(context,msg){
-     context.custid = msg;
-   },
 
   },
   actions: {

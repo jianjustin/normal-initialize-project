@@ -1,6 +1,7 @@
 <template>
     <v-layout align-start justify-center>
         <v-data-table :headers="headers" :items="desserts" :items-per-page="5" class="elevation-1"></v-data-table>
+        <span>{{count}}</span>
     </v-layout>
 </template>
 <script>
@@ -102,5 +103,10 @@ export default {
             ],
         }
     },
+    computed: {
+        count () {
+          return this.$store.state.count
+        }
+    }
 }
 </script>
