@@ -4,10 +4,10 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn dark color="#ad1357">
-                    <v-icon dark>add</v-icon>
+                    <v-icon dark>edit</v-icon>
                 </v-btn>
                 <v-btn dark color="#ad1357">
-                    <v-icon dark>edit</v-icon>
+                    <v-icon dark>add</v-icon>
                 </v-btn>
                 <v-btn dark color="#ad1357">
                     <v-icon dark>delete</v-icon>
