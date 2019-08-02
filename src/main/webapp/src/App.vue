@@ -18,6 +18,7 @@ export default {
         Navigation,
         Appbar
     },
-    data: () => ({}),
+    data: () => ({
+    }),
 }
 </script>
