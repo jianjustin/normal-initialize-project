@@ -1,5 +1,5 @@
 <template>
-        <v-app-bar class="mt-2 ml-2 mr-2 elevation-6" :clipped-left="$vuetify.breakpoint.lgAndUp" app color="#ad1357" dark>
+        <v-app-bar class="mt-2 ml-2 mr-2 elevation-6" :clipped-left="$vuetify.breakpoint.lgAndUp" app :color="$store.state.color" dark>
             <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
                 <v-app-bar-nav-icon @click.stop="setDrawer()"></v-app-bar-nav-icon>
                 <span class="hidden-sm-and-down">后台管理</span>
@@ -11,7 +11,7 @@
             <v-btn icon>
                 <v-icon>notifications</v-icon>
             </v-btn>
-            <v-btn icon>
+            <v-btn icon v-on:click="logout()">
                 <v-icon>logout</v-icon>
             </v-btn>
         </v-app-bar>
@@ -23,6 +23,10 @@ export default {
     methods: {
         setDrawer: function() {
             this.$store.state.drawer = !this.$store.state.drawer;
+        },
+        logout: function(){
+            this.$store.state.memberUser = null;
+            this.$router.push('/login');
         }
     }
 }

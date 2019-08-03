@@ -8,13 +8,13 @@
                 <v-card class="ma-2">
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn dark color="#ad1357">
+                        <v-btn dark :color="$store.state.color">
                             <v-icon dark>edit</v-icon>
                         </v-btn>
-                        <v-btn dark color="#ad1357">
+                        <v-btn dark :color="$store.state.color">
                             <v-icon dark>add</v-icon>
                         </v-btn>
-                        <v-btn dark color="#ad1357">
+                        <v-btn dark :color="$store.state.color">
                             <v-icon dark>delete</v-icon>
                         </v-btn>
                     </v-card-actions>

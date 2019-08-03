@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer class="mt-4 ml-2 mr-2 elevation-6" v-model="$store.state.drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
+    <v-navigation-drawer class="mt-4 ml-2 mr-2 elevation-6" v-model="$store.state.drawer" :clipped="true" width="256" :color="$store.state.color" app>
         <v-list dense rounded>
             <template v-for="item in items">
                 <v-list-group v-if="item.children" :key="item.text" v-model="item.model" :prepend-icon="item.model ? item.icon : item['icon-alt']" append-icon="">
@@ -47,15 +47,15 @@ export default {
             text: '用户模块',
             model: false,
             children: [
-                { icon: 'person', text: '用户管理',path: '/memberAuthority' },
-                { icon: 'add', text: '角色管理',path: '/memberResource' },
-                { icon: 'person', text: '资源管理',path: '/memberRole' },
-                { icon: 'add', text: '权限管理',path: '/memberUser' },
+            { icon: 'person', text: '用户管理', path: '/memberUser' },
+            { icon: 'add', text: '角色管理', path: '/memberRole' },
+            { icon: 'person', text: '资源管理', path: '/memberResource' },
+            { icon: 'add', text: '权限管理', path: '/memberAuthority' },
             ],
-        }, { icon: 'content_copy', text: '关于网站', path: '/' },],
+        }, { icon: 'content_copy', text: '关于网站', path: '/' }, ],
     }),
     methods: {
-        toPage(path){
+        toPage(path) {
             this.$router.push(path);
         }
     }
