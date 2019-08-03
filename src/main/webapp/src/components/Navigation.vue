@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer class="mt-3 ml-2 mr-2 elevation-6" v-model="$store.state.drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
+    <v-navigation-drawer class="mt-4 ml-2 mr-2 elevation-6" v-model="$store.state.drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
         <v-list dense rounded>
             <template v-for="item in items">
                 <v-list-group v-if="item.children" :key="item.text" v-model="item.model" :prepend-icon="item.model ? item.icon : item['icon-alt']" append-icon="">
