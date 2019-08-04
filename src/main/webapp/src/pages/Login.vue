@@ -9,7 +9,7 @@
                                 <v-toolbar-title>后台管理系统</v-toolbar-title>
                             </v-toolbar>
                             <v-card-text>
-                                <v-form>
+                                <v-form id="login-form">
                                     <v-text-field label="Login" v-model="username" name="username" prepend-icon="person" type="text"></v-text-field>
                                     <v-text-field  label="Password" v-model="password" name="password" prepend-icon="lock" type="password"></v-text-field>
                                 </v-form>
@@ -35,9 +35,18 @@ export default {
     }),
     methods:{
       login(){
-        var memberUser = require('../assets/memberUser.json');
-        this.$store.state.memberUser = memberUser;
-        this.$router.push("/");
+        debugger;
+        var _this = this;
+        var arr="username="+this.username+"&password="+this.password;
+        _this.axios.post('/api/login',arr)
+            .then((response) => {
+              _this.$store.state.token = response.data;
+              //获取权限信息，进行路由过滤
+              _this.$router.push("/");
+            }).catch((error) => {
+                console.log(error)
+            });
+        
       }
     }
 }
