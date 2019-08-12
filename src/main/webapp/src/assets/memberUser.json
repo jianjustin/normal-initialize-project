@@ -1,6 +1,0 @@
-{
-	"memberId": "1",
-	"memberName": "admin",
-	"role": "admin",
-	"permissions": [ "/login","/","/memberAuthority","/memberRole","/memberUser"]
-}
