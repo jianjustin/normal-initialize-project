@@ -92,17 +92,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>/webapp</exclude>
+                    </excludes>
+                </configuration>
 			</plugin>
 		</plugins>
-        <resources>
-            <resource>
-                <filtering>true</filtering>
-                <directory>src/main</directory>
-                <excludes>
-                    <exclude>webapp/**</exclude>
-                </excludes>
-            </resource>
-        </resources>
 	</build>
 
 

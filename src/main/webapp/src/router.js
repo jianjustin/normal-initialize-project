@@ -9,8 +9,6 @@ const MemberResource    = (resolve) => require(['./pages/member/MemberResource.v
 const MemberRole    = (resolve) => require(['./pages/member/MemberRole.vue'],resolve);
 const MemberUser    = (resolve) => require(['./pages/member/MemberUser.vue'],resolve);
 const page1    = (resolve) => require(['./pages/404.vue'],resolve);
-const Home    = (resolve) => require(['./pages/Home.vue'],resolve);
-
 
 
 const routes = [
@@ -19,8 +17,6 @@ const routes = [
   { name: 'memberRole', path: '/memberRole', component: MemberRole },
   { name: 'memberUser', path: '/memberUser', component: MemberUser },
   { name: '404', path: '/404', component: page1 },
-  { name: 'index', path: '/', component: Home },
-  { name: 'home', path: '/home', component: Home },
   { name: 'login', path: '/login', component: Login }
 ];
 
