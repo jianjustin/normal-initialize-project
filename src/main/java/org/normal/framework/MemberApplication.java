@@ -10,6 +10,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class MemberApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MemberApplication.class, args);
+		System.setProperty("DATABASE_URL","jdbc:mysql://35.229.130.215:33060/test??characterEncoding=utf8&useSSL=false");
+	    SpringApplication.run(MemberApplication.class, args);
 	}
 }
