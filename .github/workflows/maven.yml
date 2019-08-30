@@ -7,7 +7,6 @@ on:
 
 jobs:
   build:
-    language: java
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -16,6 +15,7 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
+      language: java
       run: mvn package --file pom.xml
      
 
