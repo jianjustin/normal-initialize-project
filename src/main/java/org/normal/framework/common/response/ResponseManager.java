@@ -21,10 +21,6 @@ public class ResponseManager {
 	
 	/**
 	 * 根据参数集产生响应实体
-	 * @param status
-	 * @param headers
-	 * @param datas
-	 * @return
 	 */
 	public static ResponseEntity<Map<String,Object>> getResponse(HttpStatus status,MultiValueMap<String, String> headers,Map<String,Object> datas){
 		ResponseEntity<Map<String,	Object>> responseEntity = new ResponseEntity<Map<String,Object>>(datas,headers,HttpStatus.OK);
@@ -33,13 +29,6 @@ public class ResponseManager {
 	
 	/**
 	 * 通过设置返回数据获取responseEntity
-	 * @param domain
-	 * @param domainList
-	 * @param status
-	 * @param msg
-	 * @param dataMap
-	 * @param pageTools
-	 * @return
 	 */
 	public static <T> ResponseEntity<ResponseDomain<T>> handerResponse(Class<T> clazz,T domain,List<T> domainList,HttpStatus status,String msg,Map<String,Object> dataMap,PageTools pageTools){
 		ResponseDomain<T> responseDomain = new ResponseDomain<T>();
