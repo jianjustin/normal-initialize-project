@@ -1,7 +1,5 @@
 package org.normal.framework.security;
 
-import org.janine.jian.domain.*;
-import org.janine.jian.repository.*;
 import org.normal.framework.domain.Authority;
 import org.normal.framework.domain.RoleAuthority;
 import org.normal.framework.domain.User;
